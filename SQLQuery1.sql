@@ -154,10 +154,27 @@ SubjectsID int NOT NULL,
 
 Constraint FK_Student_Subject_StudentId foreign key (StudentID) references Students(Id)
 ON DELETE CASCADE,
+
 Constraint FK_Student_Subject_SubjectsId foreign key (SubjectsID) references Subjects(Id)
 ON DELETE CASCADE ,
 )
 
+
+GO
+
+Create Table TeacherSubject 
+(
+Id int PRIMARY KEY IDENTITY(1,1),
+
+TeacherID int NOT NULL,
+SubjectsID int NOT NULL,
+
+Constraint FK_Teacher_Subject_StudentId foreign key (TeacherID) references Teacher(Id)
+ON DELETE CASCADE,
+
+Constraint FK_Teacher_Subject_SubjectsId foreign key (SubjectsID) references Subjects(Id)
+ON DELETE CASCADE ,
+)
 
 GO
 
@@ -170,7 +187,6 @@ select * from StudentSubject
 GO
 
 insert into StudentSubject(StudentID, SubjectsID)
-
 values
 (1,1),
 (2,1),
@@ -193,6 +209,67 @@ values
 (19,6)
 
 GO
+
+insert into TeacherSubject(TeacherID, SubjectsID)
+values
+(1,1),
+(2,1),
+(3,1),
+(4,2),
+(5,2),
+(6,2),
+(7,3),
+(8,3),
+(9,3),
+(10,3),
+(11,4),
+(12,4),
+(13,4),
+(14,4),
+(15,5),
+(16,5),
+(17,5),
+(18,6),
+(19,6)
+
+--filter
+
+
+
+SELECT TOP (5) * from Students as st where st.Age > 20
+
+SELECT FirstName + ' ' + LastName as FullName from Students
+
+SELECT * from Subjects sub where sub.AmountOfHours between 20 and 50
+
+SELECT * FROM Teacher t where t.PhoneNumber = ''
+
+SELECT * from Students order by Age desc --sort desc наоборот 
+
+--JOIN
+
+--student + subject
+
+SELECT * from Students
+SELECT * from Subjects
+
+SELECT st.FirstName + ' ' + st.LastName as FullName, sub.Title from StudentSubject st_Subj
+Full Join Students st on st_Subj.StudentID = st.Id
+Full Join Subjects sub on st_Subj.SubjectsID = sub.Id
+
+
+-- Join == Inner Join --
+
+-- Left Join 
+
+--Right Join
+
+--Full Join
+
+
+
+
+
 
 
 

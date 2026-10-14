@@ -6,3 +6,4 @@ SELECT TOP (100) *
  -- where Email like '%@%'
  -- where FirstName like '%J'
 
+
